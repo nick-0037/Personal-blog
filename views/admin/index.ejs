@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Blog</title>
+</head>
+<body>
+  
+  <h1>Admin section</h1>
+  <a href="/admin/new">Add</a>
+  <ul>
+    <% articles.forEach(article => { %>
+      <li>
+        <h2><%= article.title %></h2>
+        <a href="/admin/edit/<%= article.fileName %>">Edit</a>
+        <form action="/admin/delete/<%= article.fileName %>" method="POST" style="display: inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+
+</body>
+</html>
