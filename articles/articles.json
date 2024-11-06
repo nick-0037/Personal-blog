@@ -1,0 +1,14 @@
+[
+  {
+    "title": "How to Learn JavaScript",
+    "date": "2024-11-06",
+    "content": "This article will help you learn JavaScript.",
+    "fileName": "how-to-learn-javascript"
+  },
+  {
+    "title": "Introduction to Node.js",
+    "date": "2024-11-07",
+    "content": "This article introduces you to Node.js and how to get started with it.",
+    "fileName": "introduction-to-nodejs"
+  }
+]

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Blog</title>
+</head>
+<body>
+  
+  <h1>Personal blog</h1>
+  <ul>
+    <% articles.forEach(article => { %>
+      <li>
+        <a href="/article/<%= article.fileName %>">
+          <h2><%= article.title %></h2>
+          <p><%= article.date %></p>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+
+</body>
+</html>
