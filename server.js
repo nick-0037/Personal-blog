@@ -1,13 +1,22 @@
+require('dotenv').config()
+
 const express = require('express')
+const session = require('express-session')
 const fs = require('fs')
 const path = require('path')
 
 const app = express()
 
-app.set('view engine', 'ejs')
-app.set('views', './views')
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
 
 app.use(express.urlencoded({ urlencoded: true }))
+app.set('view engine', 'ejs')
+app.set('views', './views')
 
 const pathArticles = path.join(__dirname, 'articles', 'articles.json')
 
@@ -39,7 +48,14 @@ function generateFileName(title) {
     .replace(/^-+|-+$/g, '')
 }
 
-app.get('/admin', (req, res) => {
+function isAuthenticated(req, res, next) {
+  if(req.session.isAdmin) {
+    return next()
+  }
+  res.redirect('/login')
+}
+
+app.get('/admin', isAuthenticated, (req, res) => {
   const articlesData = fs.readFileSync(pathArticles, 'utf-8')
   const articles = JSON.parse(articlesData)
   
@@ -50,7 +66,7 @@ app.get('/admin/new', (req, res) => {
   res.render('admin/new')
 })
 
-app.post('/admin/new', (req, res) => {
+app.post('/admin/new', isAuthenticated, (req, res) => {
   const articlesData = fs.readFileSync(pathArticles, 'utf-8')
   const articles = JSON.parse(articlesData)
 
@@ -69,7 +85,7 @@ app.post('/admin/new', (req, res) => {
   res.redirect('/admin')
 })
 
-app.get('/admin/edit/:fileName', (req, res) => {
+app.get('/admin/edit/:fileName', isAuthenticated, (req, res) => {
   const articlesData = fs.readFileSync(pathArticles, 'utf-8');
   const articles = JSON.parse(articlesData);
 
@@ -81,7 +97,7 @@ app.get('/admin/edit/:fileName', (req, res) => {
   res.render('admin/edit', { article });
 });
 
-app.post('/admin/edit/:fileName', (req, res) => {
+app.post('/admin/edit/:fileName', isAuthenticated, (req, res) => {
   const articlesData = fs.readFileSync(pathArticles, 'utf-8');
   const articles = JSON.parse(articlesData);
   
@@ -101,13 +117,44 @@ app.post('/admin/edit/:fileName', (req, res) => {
   res.redirect('/admin')
 })
 
-app.post('/admin/delete/:fileName', (req, res) => {
+app.post('/admin/delete/:fileName', isAuthenticated, (req, res) => {
   const articlesData = fs.readFileSync(pathArticles, 'utf-8')
   const  articles = JSON.parse(articlesData)
 
   const updatedArticles = articles.filter(a => a.fileName !== req.params.fileName)
   fs.writeFileSync(pathArticles, JSON.stringify(updatedArticles))
   res.redirect('/admin')
+})
+
+// Authentication admin
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
+app.get('/login', (req, res) => {
+  res.render('login', { session: req.session })
+})
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body
+
+  if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    req.session.isAdmin = true
+    res.redirect('/admin')
+  } else {
+    req.session.error = 'Invalid username or password'
+    res.redirect('/login')
+  }
+})
+
+app.get('/login', (req, res) => {
+  req.session.destroy((err) => {
+    if(err) {
+      return res.send('Error logging out')
+    } else {
+      res.redirect('/')
+    }
+  })
+
 })
 
 const PORT = 3000
