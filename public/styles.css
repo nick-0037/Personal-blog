@@ -1,0 +1,147 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body h1  {
+  font-size: 34px;
+  padding-left: 40px;
+}
+
+body li {
+  list-style-type: none;
+}
+
+body a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 400px;
+  justify-content: space-between;
+  text-decoration: none;
+}
+
+body .date, .edit, .delete {
+  font-weight: bold;
+  color: black;
+  opacity: .5;
+}
+
+body.article header, article {
+  padding-left: 40px;
+}
+
+body.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body.login h1 {
+  padding: 0;
+}
+
+body.login form {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+}
+
+body.login label, input {
+  margin-bottom: 8px;
+}
+
+body.login div {
+  align-self: center;
+  margin: 8px;
+}
+body.login button {
+  padding: 8px 18px 8px 18px;
+}
+
+body.admin {
+  width: 600px;
+}
+
+body.admin header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+body.admin li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+body.admin li div {
+  display: flex;
+  gap: 20px;
+}
+
+body.edit form {
+  width: 600px;
+}
+
+body.edit form label{
+  width: 100px;
+  padding-left: 40px;
+}
+
+body.edit form button {
+  margin: 20px 0 0 40px;
+}
+
+body.edit form textarea {
+  margin-top: 20px;
+  resize: vertical;
+  max-height: 200px;
+  min-height: 20px;
+}
+
+body.edit textarea, input {
+  flex-grow: 1;
+  padding: 5px;
+  margin: 0;
+}
+
+body.edit div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+body.add form {
+  width: 600px;
+}
+
+body.add form label{
+  width: 100px;
+  padding-left: 40px;
+}
+
+body.add form button {
+  margin: 20px 0 0 40px;
+}
+
+body.add form textarea {
+  margin-top: 20px;
+  resize: vertical;
+  max-height: 200px;
+  min-height: 20px;
+}
+
+body.add textarea, input {
+  flex-grow: 1;
+  padding: 5px;
+  margin: 0;
+}
+
+body.add div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

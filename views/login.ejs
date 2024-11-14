@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Blog</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body class="login">
   
   <h1>Admin login</h1>
   <form action="/login" method="POST"> 
@@ -13,7 +14,9 @@
     <input type="text" name="username" id="username" required>
     <label for="password">Password:</label>
     <input type="password" name="password" id="password" required>
-    <button type="submit">Login</button>
+    <div>
+      <button type="submit">Login</button>
+    </div>
   </form>
   
   <% if (session.error) { %>

@@ -4,20 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Blog</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body class="edit">
   
   <h1>Edit article</h1>
   <form action="/admin/edit/<%= article.fileName %>" method="POST">
-    <label>Title:</label>
-    <input type="text" name="title" value="<%= article.title %>" required>
-    <br>
-    <label>Date:</label>
-    <input type="text" name="date" value="<%= article.date %>" required>
-    <br>
-    <label>Content:</label>
-    <textarea name="content" required><%= article.content %></textarea>
-    <br>
+    <div>
+      <label>Title:</label>
+      <input type="text" name="title" value="<%= article.title %>" required>
+    </div>
+    <div>
+      <label>Date:</label>
+      <input type="text" name="date" value="<%= article.date %>" required>
+    </div>
+    <div>
+      <label>Content:</label>
+      <textarea name="content" required><%= article.content %></textarea>
+    </div>
     <button type="submit">Update</button>
   </form>
 

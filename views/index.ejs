@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Blog</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   
@@ -13,7 +14,7 @@
       <li>
         <a href="/article/<%= article.fileName %>">
           <h2><%= article.title %></h2>
-          <p><%= article.date %></p>
+          <p class="date"><%= article.date %></p>
         </a>
       </li>
     <% }) %>
