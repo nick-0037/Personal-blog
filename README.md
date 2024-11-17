@@ -1,6 +1,7 @@
 # Personal blog
 
 This is personal blog project that includes an admin panel managing articles. The application allows you to add, edit, and delete articles through a form-based management system.
+https://roadmap.sh/projects/personal-blog
 
 ## features
 
