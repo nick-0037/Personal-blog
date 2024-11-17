@@ -16,9 +16,42 @@
           <h2><%= article.title %></h2>
           <p class="date"><%= article.date %></p>
         </a>
+        <a href="/article/<%= encodeURIComponent(article.fileName).trim() %>#comments-container">
+          <button class="toggle-btn-comments" data-file-name="<%= article.fileName %>">
+            <span class="comments-icon">💬</span>
+            <span class="comments-count" id="comments-count-<%= article.fileName %>">0</span>
+          </button>
+        </a>
       </li>
     <% }) %>
   </ul>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const commentButtons = document.querySelectorAll('.toggle-btn-comments');
+
+      commentButtons.forEach(button => {
+        const fileName = button.getAttribute('data-file-name');
+        loadCommentCount(fileName);
+      });
+    });
+
+    async function loadCommentCount(fileName) {
+      try {
+
+        const response = await fetch(`/comments/${fileName}`)
+        const comments = await response.json()
+
+        const commentsCountElement = document.getElementById(`comments-count-${fileName}`)
+        if(commentsCountElement) {
+          commentsCountElement.textContent = comments.length
+        }
+      } catch(error) {
+        console.error('Error loading comments count', error)
+      }
+    }
+  </script>
 
 </body>
 </html>

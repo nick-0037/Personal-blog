@@ -20,6 +20,7 @@ app.set('view engine', 'ejs')
 app.set('views', './views')
 
 const pathArticles = path.join(__dirname, 'articles', 'articles.json')
+const pathComments = path.join(__dirname, 'articles', 'comments.json')
 
 app.get('/', (req, res) => {
   const articlesData = fs.readFileSync(pathArticles, 'utf-8')
@@ -29,10 +30,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/article/:fileName', (req, res) => {
+  const decodedFileName = decodeURIComponent(req.params.fileName)
   const articlesData = fs.readFileSync(pathArticles, 'utf-8')
   const articles = JSON.parse(articlesData)
 
-  const article = articles.find(a => a.fileName === req.params.fileName)
+  const article = articles.find(a => a.fileName === decodedFileName)
 
   if(article) {
     res.render('article', { article })
@@ -147,7 +149,7 @@ app.post('/login', (req, res) => {
   }
 })
 
-app.get('/login', (req, res) => {
+app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if(err) {
       return res.send('Error logging out')
@@ -156,6 +158,18 @@ app.get('/login', (req, res) => {
     }
   })
 
+})
+
+// Comments articles
+
+app.get('/comments/:fileName', (req, res) => {
+  const commentsData = fs.existsSync(pathComments) ? fs.readFileSync(pathComments, 'utf-8') : '[]'
+  const comments = JSON.parse(commentsData)
+  const articleComments = comments.filter(comment => comment.fileName === req.params.fileName)
+
+  console.log(articleComments)
+
+  res.json(articleComments)
 })
 
 const PORT = 3000

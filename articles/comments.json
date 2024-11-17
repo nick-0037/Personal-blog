@@ -1,0 +1,18 @@
+[
+  {
+    "fileName": "how-to-learn-javascript", 
+    "author": "Jane Doe", 
+    "content": "This is a great article!"
+  },
+  {
+    "fileName": "introduction-to-nodejs", 
+    "author": "John Smith", 
+    "content": "I agree, very informative."
+  },
+  {
+    "fileName": "introduction-to-nodejs", 
+    "author": "Alice Johnson", 
+    "content": "Interesting read!"
+  }
+]
+
