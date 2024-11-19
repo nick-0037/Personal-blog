@@ -3,7 +3,7 @@
 This is personal blog project that includes an admin panel managing articles. The application allows you to add, edit, and delete articles through a form-based management system.
 https://roadmap.sh/projects/personal-blog
 
-## features
+## Features
 
 - Add Articles: Create new articles by entering a title, content, and date.
 - Edit Articles: Update the details of existing articles.
@@ -16,7 +16,7 @@ https://roadmap.sh/projects/personal-blog
 
 ## Installation 
 
-1. Clone the repository, navigate to the project directory, and install dependecies:
+1. Clone the repository, navigate to the project directory, and install dependencies:
   ```bash
   git clone https://github.com/your-username/personal-blog-admin.git
   cd personal-blog
